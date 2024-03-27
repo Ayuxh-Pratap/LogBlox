@@ -1,4 +1,5 @@
 import Calendar from '@/components/Calendar'
+import { Footer } from '@/components/Footer'
 import Logs from '@/components/Logs'
 import NavBar from '@/components/NavBar'
 import { NewLog } from '@/components/NewLog'
@@ -11,6 +12,7 @@ export default function page() {
       <NewLog />
       <Calendar />
       <Logs />
+      <Footer />
     </div>
   )
 }
