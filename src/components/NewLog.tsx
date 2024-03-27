@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -12,8 +14,38 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { GrAdd } from "react-icons/gr"
 import { DatePicker } from "./DatePicker"
+import { useLogStore } from "@/store"
+import { useToast } from "@/components/ui/use-toast"
+
 
 export function NewLog() {
+
+    const { toast } = useToast()
+
+    const log = useLogStore((state) => state.log)
+    const setLog = useLogStore((state) => state.setLog)
+
+    const validateLog = () => {
+        if (!log.date || !log.hour || log.hour === 0) {
+            throw "Date or Hour can not be empty"
+        } else if (log.hour >= 24) {
+            throw "Ghante Check kr Chutiye"
+        }
+    }
+
+    const submitLog = () => {
+
+        try {
+            validateLog()
+        } catch (e) {
+            toast({
+                variant: "destructive",
+                title: "Creating New Log : Failed",
+                description: e as string,
+            });
+        }
+    }
+
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -44,6 +76,11 @@ export function NewLog() {
                             id="hour"
                             type="number"
                             className="col-span-3"
+                            value={log.hour}
+                            onChange={(e) => setLog({
+                                ...log,
+                                hour: parseInt(e.target.value),
+                            })}
                         />
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
@@ -54,11 +91,16 @@ export function NewLog() {
                             id="note"
                             placeholder="note for this log"
                             className="col-span-3"
+                            value={log.note}
+                            onChange={(e) => setLog({
+                                ...log,
+                                note: e.target.value,
+                            })}
                         />
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button type="submit">Save log</Button>
+                    <Button type="submit" onClick={submitLog}>Save log</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
