@@ -26,7 +26,7 @@ export function NewLog() {
                 <DialogHeader>
                     <DialogTitle>Create New Log</DialogTitle>
                     <DialogDescription>
-                        "Remember, time is your most valuable asset - invest it wisely with our Time Log App"
+                        Remember, time is your most valuable asset - invest it wisely with our Time Log App
                     </DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
