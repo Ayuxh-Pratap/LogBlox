@@ -1,10 +1,10 @@
-import { Button } from '@/components/ui/button'
+import NavBar from '@/components/NavBar'
 import React from 'react'
 
 export default function page() {
   return (
     <div>
-      <Button>Click me</Button>
+      <NavBar />
     </div>
   )
 }
