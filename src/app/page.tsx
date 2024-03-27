@@ -1,4 +1,5 @@
 import Calendar from '@/components/Calendar'
+import Logs from '@/components/Logs'
 import NavBar from '@/components/NavBar'
 import { NewLog } from '@/components/NewLog'
 import React from 'react'
@@ -9,6 +10,7 @@ export default function page() {
       <NavBar />
       <NewLog />
       <Calendar />
+      <Logs />
     </div>
   )
 }
