@@ -16,6 +16,7 @@ import { GrAdd } from "react-icons/gr"
 import { DatePicker } from "./DatePicker"
 import { useLogStore } from "@/store"
 import { useToast } from "@/components/ui/use-toast"
+import dayjs from "dayjs"
 
 
 export function NewLog() {
@@ -24,6 +25,8 @@ export function NewLog() {
 
     const log = useLogStore((state) => state.log)
     const setLog = useLogStore((state) => state.setLog)
+    const setLogs = useLogStore((state) => state.setLogs)
+    const logs = useLogStore((state) => state.setLogs);
 
     const validateLog = () => {
         if (!log.date || !log.hour || log.hour === 0) {
@@ -37,6 +40,7 @@ export function NewLog() {
 
         try {
             validateLog()
+            setLogs(log, dayjs(log.date).format("YYYY-MM-DD"))
         } catch (e) {
             toast({
                 variant: "destructive",
