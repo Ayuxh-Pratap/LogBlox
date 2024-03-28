@@ -40,7 +40,11 @@ export function NewLog() {
 
         try {
             validateLog()
-            setLogs(log, dayjs(log.date).format("YYYY-MM-DD"))
+            setLogs(log, dayjs(log.date).format("YYYY-MM-DD"));
+            toast({
+                title: "Creating New Log : Success🪸",
+                description: `${log.hour} hours in ${log.date.toDateString()}`,
+            });
         } catch (e) {
             toast({
                 variant: "destructive",
