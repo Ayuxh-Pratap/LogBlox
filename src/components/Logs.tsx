@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 import {
     Table,
@@ -8,9 +10,14 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { useLogStore } from '@/store'
+import { cn } from '@/lib/utils'
 
 
 export default function Logs() {
+
+    const logs = useLogStore((state) => state.logs)
+
     return (
         <div className='border border-dashed rounded-md p-7'>
 
@@ -24,11 +31,17 @@ export default function Logs() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    <TableRow>
-                        <TableCell className="font-medium">{new Date().toDateString()}</TableCell>
-                        <TableCell>0</TableCell>
-                        <TableCell>This is the note you left for the log</TableCell>
-                    </TableRow>
+                    {Object.keys(logs).map((key) => {
+                        const log = logs[key];
+
+                        return (
+                            <TableRow key={key} className={cn(log.hour <= 5 ? "bg-red-100" : "")}>
+                                <TableCell className="font-medium">{log.date.toDateString()}</TableCell>
+                                <TableCell>{log.hour}</TableCell>
+                                <TableCell>{log.note}</TableCell>
+                            </TableRow>
+                        )
+                    })}
                 </TableBody>
             </Table>
 
